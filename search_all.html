@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <title>System Testing</title>
+    <style>
+      #navbarText {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .navClass {
+        background-color: rgb(196, 202, 204);
+        width: 100%;
+      }
+      .card-body {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .card.text-white.bg-secondary.mb-3 {
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <!------BODY------>
+  <body>
+    <!------NAVIGATION------>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navClass" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href=""
+              >See All Record</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/search_latest.html"
+              >See Last Record</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--Display all last record below-------------->
+    <div class="records"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var info = JSON.parse(localStorage.getItem("user"));
+        if (info != null) {
+          info.forEach((element) => {
+            $(".records").append(
+              `<div class="card text-white bg-secondary mb-3" style="max-width: 50%;">
+              <div class="card-body">
+                  <div> <h4> First Name: ${element.firstname} </h4> </div>
+                  <div> <h4>  Last Name: ${element.lastname} </h4> </div>
+                  <div> <h4>  Mobile: ${element.mob} </h4> </div>
+                  <div> <h4>  Email: ${element.email} </h4> </div>
+                  <div> <h4>  Address: ${element.address} </h4> </div>
+                  <div> <h4>  City: ${element.city} </h4> </div>
+                  <div> <h4>  Province: ${element.province} </h4> </div>
+                  <div> <h4>  Zip Code: ${element.zip} </h4> </div>
+                  <div> <h4>  Note: ${element.notes} </h4> </div>
+              </div>`
+            );
+          });
+        }
+        if (info[0] == null) {
+          $(".records").append(
+            `<div class="card text-white bg-secondary mb-3" style="max-width: 50%;">
+              <div class="card-body">
+                  <div> <h4> No user in record </h4> </div>
+              </div>
+              </div>`
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
